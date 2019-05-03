@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             GoogleSignInOptions.DEFAULT_SIGN_IN
         ).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(applicationContext, gso)
 
         btn_sign.setOnClickListener {
             signIn()
@@ -66,6 +66,8 @@ class MainActivity : AppCompatActivity() {
     fun updateUI(user: FirebaseUser?){
         if (user != null) {
             Toast.makeText(this, "hello" + "${user.displayName}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ShowData::class.java)
+            startActivity(intent)
         }
     }
 
