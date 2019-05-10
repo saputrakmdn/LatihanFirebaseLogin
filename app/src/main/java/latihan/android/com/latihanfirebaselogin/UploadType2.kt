@@ -72,6 +72,7 @@ class UploadType2: AppCompatActivity() {
             taskSnapshot ->
             progress.dismiss()
             Toast.makeText(this@UploadType2, "Uploaded", Toast.LENGTH_SHORT).show()
+            imgView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.mipmap.ic_launcher))
         }.addOnFailureListener {
             e-> progress.dismiss()
             Toast.makeText(this@UploadType2, "Failed"+e.message, Toast.LENGTH_SHORT).show()
