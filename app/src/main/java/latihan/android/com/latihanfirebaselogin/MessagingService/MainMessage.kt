@@ -90,7 +90,7 @@ class MainMessage: AppCompatActivity(), GoogleApiClient.OnConnectionFailedListen
         val parser = SnapshotParser<FriendlyMessage>{
             dataSnapshot ->
             val friendlyMessage = dataSnapshot.getValue(FriendlyMessage::class.java)
-            if (friendlyMessage != null /*no image*/){
+            if (friendlyMessage != null ){
                 friendlyMessage!!.setId(dataSnapshot.key!!)
             }
             friendlyMessage!!
@@ -245,7 +245,8 @@ class MainMessage: AppCompatActivity(), GoogleApiClient.OnConnectionFailedListen
                     val uri = data.data
                     Log.d(TAG, "uri"+ uri!!.toString())
                     val tempMessage = FriendlyMessage(null, mUsername!!, mPhotoUrl!!, LOADING_IMAGE_URL)
-                    mFirebaseDatabaseReference!!.child(MESSAGES_CHILD).setValue(tempMessage, object : DatabaseReference.CompletionListener{
+
+                    mFirebaseDatabaseReference!!.child(MESSAGES_CHILD).push().setValue(tempMessage, object : DatabaseReference.CompletionListener{
                         override fun onComplete(p0: DatabaseError?, p1: DatabaseReference) {
                             if (p0 == null){
                                 val key = p1.key
